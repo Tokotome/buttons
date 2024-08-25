@@ -15,6 +15,11 @@ class ButtonController extends Controller
      */
     public function index()
     {
+            // Consider updating the database to store the title directly
+            // to avoid calculating it here. This approach would shift
+            // the calculation to when a record is updated.
+            // With only 9 buttons, performance impact is minimal, but
+            // with a larger dataset, this approach would be more efficient.
         $buttons = Button::all()->map(function($button) {
             $button->name = $this->extractDomainPart($button->hyperlink);
             return $button;
